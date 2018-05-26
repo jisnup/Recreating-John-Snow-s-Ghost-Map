@@ -1,0 +1,649 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{John Snow Ghost Map}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{1. Dr. John Snow}\label{dr.-john-snow}
+
+Dr. John Snow (1813-1858) was a famous British physician and is widely
+recognized as a legendary figure in the history of public health and a
+leading pioneer in the development of anesthesia. Some even say one of
+the greatest physicians of all time.
+
+As a leading advocate of both anesthesia and hygienic practices in
+medicine, he not only experimented with ether and chloroform but also
+designed a mask and method how to administer it. He personally
+administered chloroform to Queen Victoria during the births of her
+eighth and ninth children, in 1853 and 1857, which assured a growing
+public acceptance of the use of anesthetics during childbirth.
+
+But, as we will show later, not all his life was just a success. John
+Snow is now also recognized as one of the founders of modern
+epidemiology (some also consider him as the founder of data
+visualization, spatial analysis, data science in general, and many other
+related fields) for his scientific and pretty modern data approach in
+identifying the source of a cholera outbreak in Soho, London in 1854,
+but it wasn't always like this. In fact, for a long time, he was simply
+ignored by the scientific community and currently is very often
+mythified.
+
+In this notebook, we're not only going to rediscover his "data story",
+but reanalyze the data that he collected in 1854 and recreate his famous
+map (also called The Ghost Map).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{} Loading in the pandas module}
+         \PY{c+c1}{\PYZsh{} ... YOUR CODE FOR TASK 1 ...}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         
+         \PY{c+c1}{\PYZsh{} Reading in the data}
+         \PY{n}{deaths} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/deaths.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print out the shape of the dataset}
+         \PY{c+c1}{\PYZsh{} ... YOUR CODE FOR TASK 1 ...}
+         \PY{n}{deaths}\PY{o}{.}\PY{n}{shape}
+         \PY{c+c1}{\PYZsh{} Printing out the first 5 rows}
+         \PY{c+c1}{\PYZsh{} ... YOUR CODE FOR TASK 1 ...}
+         \PY{n}{deaths}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:}    Death  X coordinate  Y coordinate
+         0      1     51.513418     -0.137930
+         1      1     51.513418     -0.137930
+         2      1     51.513418     -0.137930
+         3      1     51.513361     -0.137883
+         4      1     51.513361     -0.137883
+\end{Verbatim}
+            
+    \subsection{2. Cholera attacks!}\label{cholera-attacks}
+
+Prior to John Snow's discovery cholera was a regular visitor to London's
+overcrowded and unsanitary streets. During the time of the third cholera
+outbreak, it was one of the most studied subjects (between years
+1839-1856 over 700 studies and essays were published in London alone)
+and nearly all of the authors believed the outbreaks were due to miasma
+or "bad air".
+
+It was John Snow's pioneering work with anesthesia and gases that made
+him doubt the miasma model of the disease. Originally he formulated and
+published his theory that cholera is spread by water or food in an essay
+On the Mode of Communication of Cholera (before the outbreak in 1849).
+The essay received negative reviews in the Lancet and the London Medical
+Gazette.
+
+We know now that he was right, but Dr. Snow's dilemma was how to prove
+it? His first step to getting there was checking the data. Our dataset
+has 489 rows of data in 3 columns but to work with dataset more easily
+we will first make few changes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{} Summarizing the content of deaths}
+         \PY{c+c1}{\PYZsh{} ... YOUR CODE FOR TASK 2 ...}
+         \PY{n}{deaths}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Define the new names of your columns}
+         \PY{n}{newcols} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Death}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{death\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X coordinate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y coordinate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}longitude}\PY{l+s+s1}{\PYZsq{}} \PY{p}{\PYZcb{}}
+         
+         \PY{c+c1}{\PYZsh{} Rename your columns}
+         \PY{c+c1}{\PYZsh{} ... YOUR CODE FOR TASK 2 ...}
+         \PY{n}{deaths}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{n}{newcols}\PY{p}{,} \PY{n}{inplace} \PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Describe the dataset }
+         \PY{c+c1}{\PYZsh{} ... YOUR CODE FOR TASK 2 ...}
+         \PY{n}{deaths}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 489 entries, 0 to 488
+Data columns (total 3 columns):
+Death           489 non-null int64
+X coordinate    489 non-null float64
+Y coordinate    489 non-null float64
+dtypes: float64(2), int64(1)
+memory usage: 11.5 KB
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:}        death\_count  x\_latitude  y\_longitude
+         count        489.0  489.000000   489.000000
+         mean           1.0   51.513398    -0.136403
+         std            0.0    0.000705     0.001503
+         min            1.0   51.511856    -0.140074
+         25\%            1.0   51.512964    -0.137562
+         50\%            1.0   51.513359    -0.136226
+         75\%            1.0   51.513875    -0.135344
+         max            1.0   51.515834    -0.132933
+\end{Verbatim}
+            
+    \subsection{3. You know nothing, John
+Snow!}\label{you-know-nothing-john-snow}
+
+It was somehow unthinkable that one man could debunk the miasma theory
+and prove that all the others got it wrong, so his work was mostly
+ignored. His medical colleagues simply said: "You know nothing, John
+Snow!"
+
+As already mentioned John Snow's first attempt to debunk the "miasma"
+theory ended with negative reviews. However, a reviewer made a helpful
+suggestion in terms of what evidence would be compelling: the crucial
+natural experiment would be to find people living side by side with
+lifestyles similar in all respects except for the water source. The
+cholera outbreak in Soho, London in 1854 gave Snow the opportunity not
+only to save lives this time but also to further test and improve his
+theory. But what about the final proof that he was right?
+
+We now know how John Snow did it, so let's get the data right first.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} Create `locations` by subsetting only Latitude and Longitude from the dataset }
+         \PY{n}{locations} \PY{o}{=} \PY{n}{deaths}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Create `deaths\PYZus{}list` by transforming the DataFrame to list of lists }
+         \PY{n}{deaths\PYZus{}list} \PY{o}{=} \PY{n}{locations}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Check the length of the list}
+         \PY{c+c1}{\PYZsh{} ... YOUR CODE FOR TASK 3 ...}
+         \PY{n+nb}{len}\PY{p}{(}\PY{n}{deaths\PYZus{}list}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} 489
+\end{Verbatim}
+            
+    \subsection{4. The Ghost Map}\label{the-ghost-map}
+
+His original map, unfortunately, is not available (it might never even
+existed). We can see the famous one that he drew about a year later in
+1855, though, and it is displayed in this cell. Because the map depicts
+and visualizes the deaths sometimes it is called also The Ghost Map.
+
+We now know how John Snow did it and have the data too, so let's
+recreate his map using modern techniques.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} Plot the data on map (map location is provided) using folium and for loop for plotting all the points}
+         \PY{k+kn}{import} \PY{n+nn}{folium}
+         
+         \PY{n+nb}{map} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{51.5132119}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.13666}\PY{p}{]}\PY{p}{,} \PY{n}{tiles}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stamen Toner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{zoom\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{17}\PY{p}{)}
+         \PY{k}{for} \PY{n}{point} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{deaths\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{folium}\PY{o}{.}\PY{n}{CircleMarker}\PY{p}{(}\PY{n}{deaths\PYZus{}list}\PY{p}{[}\PY{n}{point}\PY{p}{]}\PY{p}{,} \PY{n}{radius}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fill}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{fill\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{opacity} \PY{o}{=} \PY{l+m+mf}{0.4}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n+nb}{map}\PY{p}{)}
+         \PY{n+nb}{map}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} <folium.folium.Map at 0x7f7578f40ef0>
+\end{Verbatim}
+            
+    \subsection{5. It's the pump!}\label{its-the-pump}
+
+After marking the deaths on the map, what John Snow saw was not a random
+pattern (we saw this on our recreation of The Ghost Map too). The
+majority of the deaths were concentrated at the corner of Broad Street
+(now Broadwick Street) and Cambridge Street (now Lexington Street). A
+cluster of deaths around the junction of these streets was the epicenter
+of the outbreak, but what was there? Yes, a water pump.
+
+John Snow at the time already had a developed theory that cholera
+spreads through water, so to test this he marked on the map also the
+locations of the water pumps nearby. And here it was, the whole picture.
+
+By combining the location of deaths related to cholera with locations of
+the water pumps, Snow was able to show that the majority were clustered
+around one particular public water pump in Broad Street, Soho. Finally,
+he had the proof that he needed.
+
+We will now do the same and add the locations of the pumps to our
+recreation of The Ghost Map.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{c+c1}{\PYZsh{} Import the data}
+         \PY{n}{pumps} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/pumps.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Subset the DataFrame and select just [\PYZsq{}X coordinate\PYZsq{}, \PYZsq{}Y coordinate\PYZsq{}] columns}
+         \PY{n}{locations\PYZus{}pumps} \PY{o}{=} \PY{n}{pumps}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X coordinate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y coordinate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} Transform the DataFrame to list of lists in form of [\PYZsq{}X coordinate\PYZsq{}, \PYZsq{}Y coordinate\PYZsq{}] pairs}
+         \PY{n}{pumps\PYZus{}list} \PY{o}{=} \PY{n}{locations\PYZus{}pumps}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Create a for loop and plot the data using folium (use previous map + add another layer)}
+         \PY{n}{map1} \PY{o}{=} \PY{n+nb}{map}
+         \PY{k}{for} \PY{n}{point} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pumps\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{n}{pumps\PYZus{}list}\PY{p}{[}\PY{n}{point}\PY{p}{]}\PY{p}{,} \PY{n}{popup}\PY{o}{=}\PY{n}{pumps}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pump Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{point}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{map1}\PY{p}{)}
+         \PY{n}{map1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:} <folium.folium.Map at 0x7f7578f40ef0>
+\end{Verbatim}
+            
+    \subsection{6. You know nothing, John Snow!
+(again)}\label{you-know-nothing-john-snow-again}
+
+So, John Snow finally had his proof that there was a connection between
+deaths as a consequence of the cholera outbreak and the public water
+pump that was probably contaminated. But he didn't just stop there and
+investigated further.
+
+He was looking for anomalies now (we would now say "outliers in data")
+and found two in fact where there were no deaths. First was brewery
+right on the Broad Street, so he went there and learned that they drank
+mostly beer (in other words not the water from the local pump, which
+confirms his theory that the pump is the source of the outbreak). The
+second building without any deaths was workhouse near Poland street
+where he learned that their source of water was not the pump on the
+Broad Street (confirmation again). The locations of both buildings are
+visualized also on the map on the left.
+
+He was now sure, and although officials did not trust him nor his theory
+they removed the handle to the pump next day, 8th of September 1854.
+John Snow later collected and published in his famous book also all the
+data about deaths in chronological order, before and after the peak of
+the outbreak and we will now analyze and compare the effect when the
+handle was removed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{c+c1}{\PYZsh{}Importing packages}
+         \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k}{import} \PY{n}{date}
+         \PY{k+kn}{import} \PY{n+nn}{calendar}
+         
+         \PY{c+c1}{\PYZsh{} Import the data the right way}
+         \PY{n}{dates} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/dates.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{parse\PYZus{}dates}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Set the Date when handle was removed (8th of September 1854)}
+         \PY{n}{handle\PYZus{}removed} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1854/9/8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Create new column `day\PYZus{}name` in `dates` DataFrame with names of the day }
+         \PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{day\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{weekday\PYZus{}name}
+         
+         \PY{c+c1}{\PYZsh{} Create new column `handle` in `dates` DataFrame based on a Date the handle was removed }
+         \PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{handle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{o}{.}\PY{o}{.}\PY{o}{.} \PY{o}{\PYZgt{}} \PY{o}{.}\PY{o}{.}\PY{o}{.}
+         
+         \PY{c+c1}{\PYZsh{} Check the dataset and datatypes}
+         \PY{n}{dates}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Create a comparison of how many cholera deaths and attacks there were before and after the handle was removed}
+         \PY{n}{dates}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{handle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{dates}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        TypeError                                 Traceback (most recent call last)
+
+        <ipython-input-63-fa5c39fecf73> in <module>()
+         12 
+         13 \# Create new column `handle` in `dates` DataFrame based on a Date the handle was removed 
+    ---> 14 dates['handle'] = {\ldots} > {\ldots}
+         15 
+         16 \# Check the dataset and datatypes
+    
+
+        TypeError: unorderable types: ellipsis() > ellipsis()
+
+    \end{Verbatim}
+
+    \subsection{7. The picture worth a thousand
+words}\label{the-picture-worth-a-thousand-words}
+
+Removing the handle from the pump prevented any more of the infected
+water from being collected. The spring below the pump was later found to
+have been contaminated with sewage. This act was later recognized as an
+early example of epidemiology, public health medicine and the
+application of science (the germ theory of disease) in a real-life
+crisis.
+
+A replica of the pump, together with an explanatory and memorial plaque
+and without a handle was erected in 1992 near the location of the
+original close to the back wall of what today is the John Snow pub. The
+site is subtly marked with a pink granite kerbstone in front of a small
+wall plaque.
+
+We can learn a lot from John Snow's data. We can take a look at absolute
+counts, but this observation could lead us to a wrong conclusion so
+let's take a different look on the data using Bokeh.
+
+Thanks to John Snow we have the data in chronological order (i.e. as
+time series data), so the best way to see the whole picture is to
+visualize it and look at it the way he saw it while writing On the Mode
+of Communication of Cholera (1855).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{bokeh}
+        \PY{k+kn}{from} \PY{n+nn}{bokeh}\PY{n+nn}{.}\PY{n+nn}{plotting} \PY{k}{import} \PY{n}{output\PYZus{}notebook}\PY{p}{,} \PY{n}{figure}\PY{p}{,} \PY{n}{show}
+        \PY{n}{output\PYZus{}notebook}\PY{p}{(}\PY{n}{bokeh}\PY{o}{.}\PY{n}{resources}\PY{o}{.}\PY{n}{INLINE}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Set up figure}
+        \PY{n}{p} \PY{o}{=} \PY{n}{figure}\PY{p}{(}\PY{n}{plot\PYZus{}width}\PY{o}{=}\PY{l+m+mi}{900}\PY{p}{,} \PY{n}{plot\PYZus{}height}\PY{o}{=}\PY{l+m+mi}{450}\PY{p}{,} \PY{n}{x\PYZus{}axis\PYZus{}type}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datetime}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{tools}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lasso\PYZus{}select, box\PYZus{}zoom, save, reset, wheel\PYZus{}zoom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                  \PY{n}{toolbar\PYZus{}location}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{above}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x\PYZus{}axis\PYZus{}label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y\PYZus{}axis\PYZus{}label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Deaths/Attacks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                  \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Cholera Deaths/Attacks before and after 8th of September 1854 (removing the pump handle)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot on figure}
+        \PY{n}{p}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{...}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{line\PYZus{}width}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cholera Deaths}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{p}\PY{o}{.}\PY{n}{circle}\PY{p}{(}\PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{...}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nonselection\PYZus{}fill\PYZus{}alpha}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{nonselection\PYZus{}fill\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grey}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{p}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{...}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{line\PYZus{}width}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cholera Attacks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{show}\PY{p}{(}\PY{n}{p}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{8. John Snow's myth \& Did we learn
+something?}\label{john-snows-myth-did-we-learn-something}
+
+From the previous interactive visualization, we can clearly see that the
+peak of the cholera outbreak happened before removing the handle and it
+was already in decline (downside trajectory) before the 8th of September
+1854.
+
+This different view on the data is very important because in case that
+we compare just absolute numbers this could lead us to wrong conclusion
+that removing the handle on Broad Street pump for sure stopped the
+outbreak, which is simply not true (it surely did help but did not stop
+the outbreak) and John Snow was aware of this (he just did what needed
+to be done and never aspired to become a hero).
+
+But people love stories about heroes and other myths (definitely more
+than science or data science). According to John Snow's myth, he was the
+superhero who in two days defied their equals by hypothesizing that
+cholera was a waterborne disease. Despite no one listening to him, he
+bravely continued drawing his map, convinced local authorities to remove
+the handle of the infected water pump with his findings, and stopped the
+outbreak. John Snow saved the lives of many Londoners.
+
+If we take a better look behind this story, we can find also the true
+John Snow, who was fighting the disease with limited tools and wanted to
+get proof that he was right and "knew something" about cholera. He just
+did what he could with limited time and always boiled his water before
+drinking.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
